@@ -27,12 +27,12 @@ this.tableName="users";
 
     
 
-    return new Promise(function(resolve,reject){
+    return new Promise((resolve,reject)=>{
        		
         let result;
 		_this.connection.connect();
 		 
-		_this.connection.query(sql, function (error, results, fields) {
+		_this.connection.query(sql,  (error, results, fields)=> {
 	
 
 
@@ -108,9 +108,9 @@ console.log("table name is"+this1.tableName);
             // resolve(sql);
             // reject("NOthing");
             // return promise;
-            this1.query(sql).then(function(res){
+            this1.query(sql).then((res)=>{
                 resolve(res); 
-            }).catch(function(error){
+            }).catch((error)=>{
 
                 reject(error);
             });
@@ -133,17 +133,17 @@ console.log("table name is"+this1.tableName);
             let sql = "DELETE FROM "+this.tableName+" WHERE id ="+t1;
             
             var query = this.query; 
-            return  new Promise(function(resolve,reject){
+            return  new Promise((resolve,reject)=>{
 
                 if(typeof t1 == 'undefined' || !t1)
                 {
                     reject({status:"error",message:"model is not found"});
                 }
 
-                query(sql).then(function(){
+                query(sql).then(()=>{
 
                     resolve({status:"success"});
-                }).catch(function(error){
+                }).catch((error)=>{
 
                      reject(error);
                 });
@@ -170,7 +170,7 @@ console.log("table name is"+this1.tableName);
 
     //console.log(this);
 let this1=this;
-        return new Promise(function(resolve,reject){
+        return new Promise((resolve,reject)=>{
 
             let attributes = this1.attributes;
              let t1 = attributes.id;
@@ -181,9 +181,9 @@ let this1=this;
            //  UPDATE `users` SET `id`=[value-1],`full_name`=[value-2],`mobile`=[value-3],`email`=[value-4],`password`=[value-5] WHERE 1
               var sql = "UPDATE "+this1.tableName+" SET full_name="+`"${fullname}"`+",email="+`"${email}"`+", mobile="+`"${mobile}"`+",password ="+`"${password}"`+"  WHERE id ="+t1;
             
-            this1.query(sql).then(function(res){
+            this1.query(sql).then((res)=>{
                 resolve(res); 
-            }).catch(function(error){
+            }).catch((error)=>{
 
                 reject(error);
             });
@@ -267,10 +267,10 @@ let this1=this;
         sql = "SELECT * FROM "+this.tableName;
          
             var query = this.query; 
-            return  new Promise(function(resolve,reject){
-                query(sql).then(function(data){
+            return  new Promise((resolve,reject)=>{
+                query(sql).then((data)=>{
                     resolve(data);
-                }).catch(function(error){
+                }).catch((error)=>{
 
                      reject(error);
                 });

@@ -11,7 +11,7 @@ app.set("view engine","ejs");
 
 app.set('views', path.join(__dirname, "themes/one"));
 
-app.get("/",function(req,res){
+app.get("/",(req,res)=>{
 	
 
 	res.render("site/index"); 
@@ -88,7 +88,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 // }); 
 
 
-app.get("/signup",function(req,res){
+app.get("/signup",(req,res)=>{
 	
 
 	res.render("site/signup"); 
@@ -96,7 +96,7 @@ app.get("/signup",function(req,res){
 
 
 
-app.get("/delete",function(req,res){
+app.get("/delete",(req,res)=>{
 var url_parts = url.parse(req.url, true);
 var query = url_parts.query;	
 	var id = query.id;
@@ -104,13 +104,13 @@ var query = url_parts.query;
 	var user = require("./server/common/models/user.js");
  	var user = new user();
  	user.setAttribute("id",id);//"email",s@g.c		 	
- 	user.delete().then(function(){
+ 	user.delete().then(()=>{
 
 		console.log("resolve is call then function");
 
  		return res.redirect("/users"); 
  	
- 	}).catch(function(error){
+ 	}).catch((error)=>{
 
  		console.log("error",error); 
  	
@@ -123,7 +123,7 @@ var query = url_parts.query;
 }); 
 
 
-app.post("/update",function(req,res){
+app.post("/update",(req,res)=>{
 
 	//console.log(req.body.full_name); 
 	let fullName = req.body.full_name;//shiva 
@@ -146,7 +146,7 @@ app.post("/update",function(req,res){
 		 model.update().then((result)=>{
 			console.log(result); 
 			return res.redirect("/users"); 
-		 	}).catch(function(error){
+		 	}).catch((error)=>{
 		 		console.log(error);
 		 				res.render("site/signup"); 
 		 	});
@@ -163,7 +163,7 @@ app.post("/update",function(req,res){
 	
 }});
 
-app.get("/update",function(req,res){
+app.get("/update",(req,res)=>{
 var url_parts = url.parse(req.url, true);
 var query = url_parts.query;	
 	var id = req.query.id;
@@ -174,7 +174,7 @@ var query = url_parts.query;
 		{
 				var user = require("./server/common/models/user.js");
 			 	var user = new user();
-			 	user.findOne(id).then(function (error,userdata)
+			 	user.findOne(id).then( (error,userdata)=>
 				{
 
 					if(error)
@@ -230,7 +230,7 @@ app.get("/users",(req,res)=>{
 		userdata = JSON.parse( JSON.stringify(userdata));
 		console.log("results in app ="+userdata);
 		res.render("site/users",{users:userdata}); 
-	}).catch(function(error){
+	}).catch((error)=>{
 
 		console.log(error);
 	});
@@ -260,7 +260,7 @@ app.post("/signup",(req,res)=>{
 		 	model.create().then((result)=>{
 			console.log(result); 
 
-		 	}).catch(function(error){
+		 	}).catch((error)=>{
 		 		console.log(error);
 		 				res.render("site/signup"); 
 		 	});
